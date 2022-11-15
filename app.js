@@ -1,7 +1,8 @@
+require('dotenv').config()
 const express = require('express') //importar el paquete express
 const app = express()
 const hbs = require('hbs')
-const port = 8182 //Definir el puerto
+const port = process.env.PORT //Definir el puerto
 
 app.use(express.static('public')); //establecer el directorio en que se escuentra el archivo html
 
@@ -25,10 +26,10 @@ app.get('/Contacto', (req,res)=>{
     res.send('Contacto')
 })
 
-// app.get('*', (req,res)=>{
-//     //res.send('Pagina no encontrada')
-//     res.sendFile(__dirname + '/public/404.hbs'); //llamar a la pagina
-// })
+app.get('*', (req,res)=>{
+    res.send('Pagina no encontrada')
+    res.sendFile(__dirname + '/public/404.hbs'); //llamar a la pagina
+})
 
 app.listen(port,() => {
     console.log(`Escuchando el puerto ${port}`)
